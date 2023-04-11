@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-around;
+  max-width: 900px;
+  margin: auto;
+}
+
+input {
+  width: 250px;
+  height: 45px;
+  border: 2px solid black;
+  border-radius: 8px;
+}
+
+.searchButton {
+  margin-left: 25px;
+  width: 100px;
+  height: 45px;
+  border-radius: 20px;
+  background-color: #3038D1;
+  color: white;
+  font-size: 19px;
+}
+
+.inputField {
+  margin-top: 40px;
+}

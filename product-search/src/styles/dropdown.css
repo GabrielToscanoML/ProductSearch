@@ -1,0 +1,44 @@
+.dropDown {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  font-size: 30px;
+}
+
+.dropDownItem {
+  padding: 0;
+  width: 180px;
+  height: 43px;
+  margin-bottom: -15px;
+  border: 2px solid black;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #263456;
+  color: white;
+}
+
+.dropDownItem:hover {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  display: block;
+  position: relative;
+  padding: 5px 15px;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+ul.dropdown {
+  padding: 0px;
+  z-index: 999;
+  display: none;
+}
+
+section:hover ul.dropdown {
+  display: block;
+}
