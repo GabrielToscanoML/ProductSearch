@@ -1,27 +1,26 @@
 import '../styles/header.css';
 import DropDownCategory from './DropDownCategory';
 import DropDownSite from './DropDownSite';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ProductsContext from '../context/ProductsContext';
-import { getProductByQueryML, getProductsFromCategoryAndQueryML } from '../services/mercadoLivreAPI';
+import { getProductByQueryML } from '../services/mercadoLivreAPI';
 
 export default function Header() {
-  const { currentSite, currentCategory, inputSearch,
-  setCurrentSite, setCurrentCategory, setinputSearch,
+  const { setCurrentSite, setCurrentCategory,
   setProductsData } = useContext(ProductsContext);
 
-  const teste = async () => {
-    if (currentSite === 'MercadoLivre') {
-      const data = await getProductByQueryML(currentCategory);
-      setProductsData(data);
-    }
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [inputSearch, setinputSearch] = useState('');
+
+  const getProductsData = async () => {
+    setCurrentCategory(inputSearch);
+    const data = await getProductByQueryML(inputSearch);
+    setProductsData(data);
     setCurrentSite('');
-    setCurrentCategory('');
-    setinputSearch('');
   }
 
   useEffect(() => {
-    console.log(inputSearch);
+    inputSearch.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
   }, [inputSearch]);
 
   return (
@@ -37,7 +36,7 @@ export default function Header() {
           name="Category &#x25BE;"
           item1="Geladeira"  
           item2="TV"  
-          item3="Celular"  
+          item3="Celular"
         />
       </div>
 
@@ -51,7 +50,8 @@ export default function Header() {
         <button
           type="button"
           className="searchButton"
-          onClick={ teste }
+          onClick={ getProductsData }
+          disabled={ isDisabled }
         >
           Search
         </button>
