@@ -1,58 +1,62 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "./components/Header";
 import ProductsContext from "./context/ProductsContext";
 
 import './styles/app.css';
+import ProductCard from "./components/ProductCard";
+import FilterSearch from "./components/FilterSearch";
 
 function App() {
   const [currentSite, setCurrentSite] = useState('');
   const [currentCategory, setCurrentCategory] = useState('');
-  const [inputSearch, setinputSearch] = useState('');
   const [productsData, setProductsData] = useState([]);
+  const [filteredProductsData, setfilteredProductsData] = useState([]);
 
   const values = useMemo(() => ({
     currentSite,
     currentCategory,
     productsData,
-    inputSearch,
+    filteredProductsData,
     setCurrentSite,
     setCurrentCategory,
     setProductsData,
-    setinputSearch,
-  }),[currentSite, currentCategory, productsData, inputSearch,
-    setCurrentSite, setCurrentCategory, setProductsData, setinputSearch]);
+    setfilteredProductsData,
+  }),[currentSite, currentCategory, productsData,
+    filteredProductsData, setCurrentSite, setCurrentCategory,
+    setProductsData, setfilteredProductsData]);
+
+    useEffect(() => {
+      setfilteredProductsData(productsData);
+    }, [productsData]);
 
   return (
     <ProductsContext.Provider value={ values }>
       <div className="App">
         <Header />
         <div className="information">
-          { currentSite.length > 0
-            ? <p>{currentSite}</p>
-            : <p>Escolha um site</p>
-          }
-          <p>/</p>
-          { currentCategory.length > 0
-            ? <p>{currentCategory}</p>
-            : <p>Escolha uma categoria</p>
+          <p>API do Buscapé não está funcionando. Enquanto isso, todas as requisições serão feitas pelo ML</p>
+          {/* <p>/</p> */}
+          { productsData.length > 0
+            ? <p>Categoria buscada: {currentCategory}</p>
+            : <p>Escolha uma categoria ou busque por um produto</p>
           }
         </div>
         <hr/>
-        { 
-          productsData.map((product, index) => {
-            if (index >= 0) {
-              return (
-                <div key={ product.id }>
-                  <li>
-                    <p>{ product.title }</p>
-                    <img src={ product.thumbnail } alt={ product.title } />
-                    <p>{ product.price }</p>
-                  </li>
-                </div>
-              );
-            }
-          })
-        }
+        <FilterSearch />
+        <main className="products">
+          { 
+            filteredProductsData.map((product, index) => {
+              if (index >= 0) {
+                return (
+                  <div key={ product.id }>
+                    <ProductCard product={product}/>
+                  </div>
+                );
+              }
+              return null;
+            })
+          }
+        </main>
       </div>
     </ProductsContext.Provider>
   );

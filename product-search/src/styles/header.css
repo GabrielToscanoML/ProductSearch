@@ -14,7 +14,7 @@ input {
   padding: 15px;
 }
 
-.searchButton {
+button {
   margin-left: 25px;
   width: 100px;
   height: 45px;
@@ -29,6 +29,22 @@ input {
   margin-bottom: 10px;
 }
 
-.searchButton:hover {
+button {
   cursor: pointer;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+@media(max-width: 1000px) {
+  .header {
+    flex-direction: column;
+    height: 300px;
+  }
+  .inputField {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

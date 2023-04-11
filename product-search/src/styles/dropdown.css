@@ -46,3 +46,9 @@ ul.dropdown {
 section:hover ul.dropdown {
   display: block;
 }
+
+@media(max-width: 1000px) {
+  .dropDown {
+    justify-content: space-evenly;
+  }
+}
