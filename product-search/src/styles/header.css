@@ -1,6 +1,5 @@
 .header {
   display: flex;
-  /* align-items: center; */
   justify-content: space-around;
   max-width: 900px;
   margin: auto;
@@ -11,6 +10,8 @@ input {
   height: 45px;
   border: 2px solid black;
   border-radius: 8px;
+  font-size: 18px;
+  padding: 15px;
 }
 
 .searchButton {
@@ -24,5 +25,10 @@ input {
 }
 
 .inputField {
-  margin-top: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.searchButton:hover {
+  cursor: pointer;
 }
