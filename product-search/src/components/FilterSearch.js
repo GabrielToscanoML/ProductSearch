@@ -32,7 +32,7 @@ export default function FilterSearch() {
     <div className="filter">
       <input
         type="search"
-        placeholder="Filter Products"
+        placeholder="Filtrar Produtos"
         value={ filterSearch }
         onChange={({ target }) => setFilterSearch(target.value)}
       ></input>

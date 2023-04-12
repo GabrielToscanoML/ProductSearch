@@ -6,17 +6,18 @@ import ProductsContext from '../context/ProductsContext';
 import { getProductByQueryML } from '../services/mercadoLivreAPI';
 
 export default function Header() {
-  const { setCurrentSite, setCurrentCategory,
+  const { currentSite, setCurrentCategory,
   setProductsData } = useContext(ProductsContext);
 
   const [isDisabled, setIsDisabled] = useState(true);
   const [inputSearch, setinputSearch] = useState('');
 
-  const getProductsData = async () => {
-    setCurrentCategory(inputSearch);
-    const data = await getProductByQueryML(inputSearch);
-    setProductsData(data);
-    setCurrentSite('');
+  const getProductsData = async (item) => {
+    setCurrentCategory(item);
+    if (currentSite === 'MercadoLivre') {
+      const data = await getProductByQueryML(item);
+      setProductsData(data);
+    }
   }
 
   useEffect(() => {
@@ -39,21 +40,20 @@ export default function Header() {
           item3="Celular"
         />
       </div>
-
       <div className="inputField">
         <input
           type="search"
-          placeholder="Search Products"
+          placeholder="Buscar Produtos"
           value={ inputSearch }
           onChange={({ target }) => setinputSearch(target.value)}
         ></input>
         <button
           type="button"
           className="searchButton"
-          onClick={ getProductsData }
+          onClick={ () => getProductsData(inputSearch) }
           disabled={ isDisabled }
         >
-          Search
+          Pesquisar
         </button>
       </div>
     </header>

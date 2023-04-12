@@ -5,13 +5,14 @@ import { getProductByQueryML } from '../services/mercadoLivreAPI';
 
 export default function DropDownCategory(props) {
   const { setCurrentCategory, setProductsData,
-   setCurrentSite } = useContext(ProductsContext);
+   currentSite } = useContext(ProductsContext);
 
   const getProductsData = async (item) => {
     setCurrentCategory(item);
-    const data = await getProductByQueryML(item);
-    setProductsData(data);
-    setCurrentSite('');
+    if (currentSite === 'MercadoLivre') {
+      const data = await getProductByQueryML(item);
+      setProductsData(data);
+    }
   }
 
   return (

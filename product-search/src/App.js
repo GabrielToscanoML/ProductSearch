@@ -34,17 +34,20 @@ function App() {
       <div className="App">
         <Header />
         <div className="information">
-          <p>API do Buscapé não está funcionando. Enquanto isso, todas as requisições serão feitas pelo ML</p>
-          {/* <p>/</p> */}
-          { productsData.length > 0
-            ? <p>Categoria buscada: {currentCategory}</p>
+        { currentSite.length > 0
+            ? <p>Site escolhido: {currentSite}</p>
+            : <p>Escolha um site de busca</p>
+          }
+          <p>/</p>
+          { currentCategory.length > 0
+            ? <p>Categoria escolhida: {currentCategory}</p>
             : <p>Escolha uma categoria ou busque por um produto</p>
           }
         </div>
         <hr/>
         <FilterSearch />
         <main className="products">
-          { 
+          {
             filteredProductsData.map((product, index) => {
               if (index >= 0) {
                 return (
